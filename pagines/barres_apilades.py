@@ -40,11 +40,9 @@ COLORS = [
 # Filtres de la barra lateral 
 st.sidebar.header("Filtres")
 n_paisos = st.sidebar.slider("Nombre de països a mostrar", 5, 30, 15)
-ordre = st.sidebar.radio("Ordre", ["Descendent", "Ascendent"])
 
-ascending = ordre.startswith("Ascendent")
 top_df = (
-    df.sort_values("Ladder score", ascending=ascending)
+    df.sort_values("Ladder score", ascending=False)
     .head(n_paisos)
     .reset_index(drop=True)
 )
@@ -68,7 +66,7 @@ for (col_orig, nom_cat), color in zip(FACTORS.items(), COLORS):
 
 fig.update_layout(
     barmode="stack",
-    title=f"Puntuació de felicitat per país — Top {n_paisos} ({ordre.split()[0].lower()})",
+    title=f"Puntuació de felicitat per país — Top {n_paisos}",
     xaxis_title="País",
     yaxis_title="Puntuació de felicitat (Ladder score)",
     template="plotly_dark",
