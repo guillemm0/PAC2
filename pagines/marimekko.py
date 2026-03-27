@@ -5,8 +5,8 @@ import numpy as np
 
 st.title("Emissions de CO₂ per Sector i Continent – Gràfic Marimekko")
 st.markdown(
-    "L'**amplada** de cada columna representa el total d'emissions absolutes del continent. "
-    "L'**alçada** de cada segment mostra el pes percentual de cada sector dins d'aquell continent. "
+    "L'amplada de cada columna representa el total d'emissions absolutes del continent. "
+    "L'alçada de cada segment mostra el pes percentual de cada sector dins d'aquell continent. "
     "Els rectangles més grans indiquen on cal focalitzar els esforços de reducció."
 )
 
@@ -162,13 +162,3 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
-
-# ── Mètriques de context ───────────────────────────────────────────────────────
-st.subheader("Context global")
-col1, col2, col3 = st.columns(3)
-label_periode = f"{any_inici}–{any_fi}" if any_inici != any_fi else str(any_inici)
-col1.metric(f"Mitjana anual global ({label_periode})", f"{total_global/1e9:.1f} Gt CO₂")
-top_cont = continents[0]
-col2.metric("Major emissor", f"{top_cont} ({totals[0]/total_global*100:.0f}%)")
-top_sector_global = pivot.sum().idxmax()
-col3.metric("Sector dominant", NOMS_SECTORS[top_sector_global])
